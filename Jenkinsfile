@@ -1,3 +1,6 @@
+def appNameLabel = "docker_ci"
+def taskLabel = env.JOB_NAME
+def containerName="docs-${env.BUILD_NUMBER}"
 
 node("worker") {
   stage('clean') {
@@ -7,10 +10,6 @@ node("worker") {
     checkout scm
   }
   stage("building docs for branch  ${env.BRANCH_NAME}") {
-    def appNameLabel = "docker_ci"
-    def taskLabel = env.JOB_NAME
-  }
-  stage("run ci container") {
     docker.image(
       "orientdb/jenkins-slave-gitbook:6.0.0").inside($/
         --label collectd_docker_app=${appNameLabel} \
@@ -38,7 +37,8 @@ node("worker") {
           --name ${containerName}  \
           --memory=2g \
           -v /home/orient:/home/jenkins:ro
-        /$) {
+        /$
+      ) {
           echo(
             sh(label: 'rsync',
               script: $/
@@ -46,8 +46,8 @@ node("worker") {
                       /$,
               returnStdout: true
             )
-          )
-        }
+        )
+      }
     } else {
       echo("it's a PR, no sync required")
     }
