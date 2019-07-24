@@ -1,15 +1,15 @@
 def appNameLabel = "docker_ci"
 def taskLabel = env.JOB_NAME
 def containerName="docs-${env.BUILD_NUMBER}"
-def gitbookImage=docker.build('orientdb/Jenkins-slave-gitbook:6.0.0')
+def gitbookImage
 
 node("worker") {
   stage('checkout') {
     checkout scm
   }
   stage("building docs for branch  ${env.BRANCH_NAME}") {
-    docker.image(
-      "orientdb/jenkins-slave-gitbook:6.0.0").inside($/
+    gitbookImage=docker.build('orientdb/jenkins-slave-gitbook:6.0.0')
+    gitbookImage.inside($/
         --label collectd_docker_app=${appNameLabel} \
         --label collectd_docker_task=${taskLabel} \
         --name ${containerName} --memory=2g
