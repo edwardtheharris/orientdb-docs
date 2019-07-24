@@ -39,7 +39,7 @@ node("worker") {
          /$)
       }
     } else {
-        echo "it's a PR, no sync required"
+      echo("it's a PR, no sync required")
     }
   }
 }
