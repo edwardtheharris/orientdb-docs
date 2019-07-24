@@ -3,9 +3,6 @@ def taskLabel = env.JOB_NAME
 def containerName="docs-${env.BUILD_NUMBER}"
 
 node("worker") {
-  stage('clean') {
-    deleteDir()
-  }
   stage('checkout') {
     checkout scm
   }
