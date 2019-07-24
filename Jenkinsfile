@@ -1,6 +1,7 @@
 def appNameLabel = "docker_ci"
 def taskLabel = env.JOB_NAME
 def containerName="docs-${env.BUILD_NUMBER}"
+def gitbookImage=docker.build('orientdb/Jenkins-slave-gitbook')
 
 node("worker") {
   stage('checkout') {
