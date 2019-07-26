@@ -18,7 +18,7 @@ node("worker") {
           label: 'gitbook',
           returnStdout: true,
           script: $/
-            rm -rf _/book/*
+            rm -rfv _/book/*
             gitbook install --gitbook 3.1.1 .
             gitbook build --gitbook 3.1.1 .
             gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
