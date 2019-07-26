@@ -14,7 +14,7 @@ ansiColor() {
                          passwordVariable: 'gcr_pass',
                          usernameVariable: 'gcr_user')
       ]) {
-        docker.withRegistry('https://gcr.io', 'xander-the-harris-jenkins') {
+        docker.withRegistry('https://gcr.io', 'gcr:xander-the-harris-jenkins') {
           gitbookImage=docker.build('gcr.io/xander-the-harris-jenkins/agent.gitbook')
           gitbookImage.push("v${env.BUILD_NUMBER}")
         }
