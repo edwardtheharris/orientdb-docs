@@ -13,7 +13,7 @@ ansiColor() {
         usernamePassword(credentialsId: "xander-the-harris-jenkins",
                          usernameVariable: 'gcr_user',
                          passwordVariable: 'gcr_pass')
-        ]) {
+      ]) {
         docker.withRegistry('https://gcr.io', 'xander-the-harris-jenkins') {
           gitbookImage=docker.build('gcr.io/xander-the-harris-jenkins/agent.gitbook')
         }
