@@ -16,14 +16,15 @@ ansiColor() {
       ]) {
         docker.withRegistry('https://gcr.io', 'xander-the-harris-jenkins') {
           gitbookImage=docker.build('gcr.io/xander-the-harris-jenkins/agent.gitbook')
+          gitbookImage.push("v${env.BUILD_NUMBER}")
         }
       }
     }
+    stage('build the gitbook')
       gitbookImage.inside($/
           --label collectd_docker_app=${appNameLabel} \
           --label collectd_docker_task=${taskLabel} \
-          --name ${containerName} --memory=2g
-        /$
+          --name ${containerName} --memory=2g /$
       ) {
         echo(
           sh(label: 'gitbook',
