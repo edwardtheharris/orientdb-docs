@@ -17,7 +17,7 @@ ansiColor() {
         /$
       ) {
         echo(
-          sh(label: 'build',
+          sh(label: 'gitbook',
              script: $/
                         rm -rf _/book/*
                         gitbook install --gitbook 3.1.1 .
@@ -51,5 +51,5 @@ ansiColor() {
       //   echo("it's a PR, no sync required")
       // }
     }
-  }  
+  }
 }
