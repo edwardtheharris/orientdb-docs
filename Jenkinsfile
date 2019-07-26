@@ -1,6 +1,7 @@
 def docsImage
 def appNameLabel = "docker_ci";
 def taskLabel = env.JOB_NAME.replaceAll(/\//, "_")
+def containerName = "OrientDBDocs.${env.BUILD_NUMBER}"
 
 node("worker") {
   stage('checkout') {
