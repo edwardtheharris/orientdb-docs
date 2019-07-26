@@ -24,16 +24,10 @@ ansiColor() {
       gitbookImage.inside($/ -v ${env.WORKSPACE}:/gitbook
           --name ${containerName}/$
       ) {
-          sh(label: 'gitbook',
-             script: $/
-                        rm -rfv _/book/*
-                        which gitbook
+        sh("which gitbook")
                         // gitbook install --gitbook 3.1.1 .
                         // gitbook build --gitbook 3.1.1 .
                         // gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
-                     /$,
-             returnStdout: true
-          )
         echo("good enough")
       }
       stage('archive') {
