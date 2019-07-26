@@ -21,22 +21,18 @@ ansiColor() {
       }
     }
     stage('build the gitbook') {
-      gitbookImage.inside($/
-          --label collectd_docker_app=${appNameLabel} \
-          --label collectd_docker_task=${taskLabel} \
-          --name ${containerName} --memory=2g /$
+      gitbookImage.inside($/ -v ${env.WORKSPACE}:/gitbook
+          --name ${containerName}/$
       ) {
-        // echo(
-        //   sh(label: 'gitbook',
-        //      script: $/
-        //                 rm -rf _/book/*
-        //                 gitbook install --gitbook 3.1.1 .
-        //                 gitbook build --gitbook 3.1.1 .
-        //                 gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
-        //              /$,
-        //      returnStdout: true
-        //   )
-        // )
+          sh(label: 'gitbook',
+             script: $/
+                        rm -rf _/book/*
+                        gitbook install --gitbook 3.1.1 .
+                        gitbook build --gitbook 3.1.1 .
+                        gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
+                     /$,
+             returnStdout: true
+          )
         echo("good enough")
       }
       stage('archive') {
