@@ -26,10 +26,11 @@ ansiColor() {
       ) {
           sh(label: 'gitbook',
              script: $/
-                        rm -rf _/book/*
-                        gitbook install --gitbook 3.1.1 .
-                        gitbook build --gitbook 3.1.1 .
-                        gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
+                        rm -rfv _/book/*
+                        which gitbook
+                        // gitbook install --gitbook 3.1.1 .
+                        // gitbook build --gitbook 3.1.1 .
+                        // gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
                      /$,
              returnStdout: true
           )
