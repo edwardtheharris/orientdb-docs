@@ -20,7 +20,7 @@ ansiColor() {
         }
       }
     }
-    stage('build the gitbook')
+    stage('build the gitbook') {
       gitbookImage.inside($/
           --label collectd_docker_app=${appNameLabel} \
           --label collectd_docker_task=${taskLabel} \
