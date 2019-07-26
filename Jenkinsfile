@@ -10,7 +10,7 @@ ansiColor() {
     }
     stage("building docs for branch  ${env.BRANCH_NAME}") {
       withCredentials([
-        usernamePassword(credentialsId: "xander-the-harris-jenkins",
+        usernamePassword(credentialsId: "gcr:xander-the-harris-jenkins",
                          usernameVariable: 'gcr_user',
                          passwordVariable: 'gcr_pass')
       ]) {
