@@ -8,7 +8,8 @@ node("worker") {
     checkout scm
   }
   stage("building docs for branch  ${env.BRANCH_NAME}") {
-    docker.image("orientdb/jenkins-slave-gitbook:6.0.0").inside($/ \
+    docsImage = docker.build("orientdb/jenkins-slave-gitbook:6.0.0")
+    docsImage.inside($/ \
       --label collectd_docker_app=${appNameLabel} \
       --label collectd_docker_task=${taskLabel} \
       --name ${containerName} \
