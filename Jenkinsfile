@@ -11,8 +11,8 @@ ansiColor() {
     stage("building docs for branch  ${env.BRANCH_NAME}") {
       withCredentials([
         usernamePassword(credentialsId: 'gcr:xander-the-harris-jenkins',
-												 passwordVariable: 'gcr_pass',
-												 usernameVariable: 'gcr_user')
+                         passwordVariable: 'gcr_pass',
+                         usernameVariable: 'gcr_user')
       ]) {
         docker.withRegistry('https://gcr.io', 'xander-the-harris-jenkins') {
           gitbookImage=docker.build('gcr.io/xander-the-harris-jenkins/agent.gitbook')
