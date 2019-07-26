@@ -26,17 +26,21 @@ ansiColor() {
           --label collectd_docker_task=${taskLabel} \
           --name ${containerName} --memory=2g /$
       ) {
-        echo(
-          sh(label: 'gitbook',
-             script: $/
-                        rm -rf _/book/*
-                        gitbook install --gitbook 3.1.1 .
-                        gitbook build --gitbook 3.1.1 .
-                        gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
-                     /$,
-             returnStdout: true
-          )
-        )
+        // echo(
+        //   sh(label: 'gitbook',
+        //      script: $/
+        //                 rm -rf _/book/*
+        //                 gitbook install --gitbook 3.1.1 .
+        //                 gitbook build --gitbook 3.1.1 .
+        //                 gitbook pdf --gitbook 3.1.1 . _book/OrientDB-Manual.pdf
+        //              /$,
+        //      returnStdout: true
+        //   )
+        // )
+        echo("good enough")
+      }
+      stage('archive') {
+        archiveArtifacts('*file')
       }
       // if (!env.BRANCH_NAME.startsWith("PR-")) {
       //   docker.image(
