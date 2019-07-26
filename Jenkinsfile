@@ -16,7 +16,6 @@ ansiColor() {
           --name ${containerName} --memory=2g
         /$
       ) {
-        checkout scm
         echo(
           sh(label: 'gitbook',
              script: $/
