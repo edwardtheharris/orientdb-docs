@@ -9,7 +9,16 @@ ansiColor() {
       checkout scm
     }
     stage("building docs for branch  ${env.BRANCH_NAME}") {
-      gitbookImage=docker.build('orientdb/jenkins-slave-gitbook:6.0.0')
+      withCredentials([
+        usernamePassword(credentialsId: "xander-the-harris-jenkins",
+                         usernameVariable: 'gcr_user',
+                         passwordVariable: 'gcr_pass')
+        ]) {
+        docker.withRegistry('https://gcr.io', 'xander-the-harris-jenkins') {
+          gitbookImage=docker.build('gcr.io/xander-the-harris-jenkins/agent.gitbook')
+        }
+      }
+    }
       gitbookImage.inside($/
           --label collectd_docker_app=${appNameLabel} \
           --label collectd_docker_task=${taskLabel} \
